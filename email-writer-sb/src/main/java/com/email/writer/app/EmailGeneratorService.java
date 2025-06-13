@@ -1,6 +1,7 @@
 package com.email.writer.app;
 
 import org.springframework.stereotype.Service;
+import java.util.Map;
 
 @Service
 public class EmailGeneratorService {
@@ -8,7 +9,16 @@ public class EmailGeneratorService {
     public String generateEmailReply(EmailRequest emailRequest){
         //BUILD THE PROMPT
         String prompt = buildPrompt(emailRequest);
+
         //CRAFT A REQUEST
+        Map<String,Object> requestBody = Map.of(
+                "contents",new Object[]{
+                        Map.of("parts",new Object[]{
+                                Map.of("text",prompt)
+                        })
+                }
+        );
+
         //DO REQUEST AND GET RESPONSE
         //RETURN RESPONSE
     }
